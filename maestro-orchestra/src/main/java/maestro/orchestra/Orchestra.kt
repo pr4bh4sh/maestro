@@ -19,7 +19,7 @@
 
 package maestro.orchestra
 
-import maestro.*
+import maestro.* // ktlint-disable no-wildcard-imports
 import maestro.Filters.asFilter
 import maestro.js.GraalJsEngine
 import maestro.js.JsEngine

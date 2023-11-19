@@ -4,6 +4,7 @@ plugins {
     id "idea"
     id "com.vanniktech.maven.publish"
     id "com.google.protobuf"
+    id "org.jlleitschuh.gradle.ktlint"
 }
 
 protobuf {

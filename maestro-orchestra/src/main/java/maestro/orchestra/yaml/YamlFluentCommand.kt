@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import maestro.KeyCode
 import maestro.Point
 import maestro.TapRepeat
-import maestro.orchestra.*
+import maestro.orchestra.* // ktlint-disable no-wildcard-imports
 import maestro.orchestra.error.InvalidFlowFile
 import maestro.orchestra.error.MediaFileNotFound
 import maestro.orchestra.error.SyntaxError

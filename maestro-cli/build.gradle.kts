@@ -5,6 +5,7 @@ plugins {
     application
     id("org.jreleaser") version "1.0.0"
     id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 group = "dev.mobile"
