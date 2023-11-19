@@ -6,7 +6,7 @@ object ExecutionOrderPlanner {
 
     fun getFlowsToRunInSequence(
         paths: Map<String, Path>,
-        flowOrder: List<String>,
+        flowOrder: List<String>
     ): List<Path> {
         if (flowOrder.isEmpty()) return emptyList()
 
@@ -25,5 +25,4 @@ object ExecutionOrderPlanner {
             emptyList()
         }
     }
-
 }

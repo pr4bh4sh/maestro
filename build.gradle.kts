@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.google.protobuf) apply false
     alias(libs.plugins.vanniktech.publish)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.ktlint)
 }
 
 java {
@@ -16,5 +17,5 @@ detekt {
     buildUponDefaultConfig = true
     allRules = false
     autoCorrect = true
-    config = files("${rootDir}/detekt.yml")
+    config = files("$rootDir/detekt.yml")
 }

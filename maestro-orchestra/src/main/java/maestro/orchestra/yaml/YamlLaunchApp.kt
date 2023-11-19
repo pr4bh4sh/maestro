@@ -27,7 +27,7 @@ data class YamlLaunchApp(
     val clearKeychain: Boolean?,
     val stopApp: Boolean?,
     val permissions: Map<String, String>?,
-    val arguments: Map<String, Any>?,
+    val arguments: Map<String, Any>?
 ) {
 
     companion object {
@@ -41,7 +41,7 @@ data class YamlLaunchApp(
                 clearKeychain = null,
                 stopApp = null,
                 permissions = null,
-                arguments = null,
+                arguments = null
             )
         }
     }

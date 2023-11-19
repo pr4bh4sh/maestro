@@ -18,7 +18,7 @@ internal class MaestroCommandSerializationTest {
                 selector = ElementSelector(textRegex = "[A-f0-9]"),
                 retryIfNoChange = false,
                 waitUntilVisible = true,
-                longPress = false,
+                longPress = false
             )
         )
 
@@ -40,7 +40,7 @@ internal class MaestroCommandSerializationTest {
                 "longPress" : false
               }
             }
-          """.trimIndent()
+        """.trimIndent()
 
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
@@ -57,7 +57,7 @@ internal class MaestroCommandSerializationTest {
                 y = 100,
                 retryIfNoChange = false,
                 waitUntilVisible = true,
-                longPress = false,
+                longPress = false
             )
         )
 
@@ -77,7 +77,7 @@ internal class MaestroCommandSerializationTest {
                 "longPress" : false
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -91,7 +91,7 @@ internal class MaestroCommandSerializationTest {
             TapOnPointV2Command(
                 point = "20,30",
                 retryIfNoChange = false,
-                longPress = false,
+                longPress = false
             )
         )
 
@@ -109,7 +109,7 @@ internal class MaestroCommandSerializationTest {
                 "longPress" : false
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -133,7 +133,7 @@ internal class MaestroCommandSerializationTest {
             {
               "scrollCommand" : { }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -146,7 +146,7 @@ internal class MaestroCommandSerializationTest {
         val command = MaestroCommand(
             SwipeCommand(
                 startPoint = Point(10, 10),
-                endPoint = Point(100, 100),
+                endPoint = Point(100, 100)
             )
         )
 
@@ -170,7 +170,7 @@ internal class MaestroCommandSerializationTest {
                 "duration" : 400
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -194,7 +194,7 @@ internal class MaestroCommandSerializationTest {
             {
               "backPressCommand" : { }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -230,7 +230,7 @@ internal class MaestroCommandSerializationTest {
                 }
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -256,7 +256,7 @@ internal class MaestroCommandSerializationTest {
                 "text" : "Hello, world!"
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -282,7 +282,7 @@ internal class MaestroCommandSerializationTest {
                 "appId" : "com.twitter.android"
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -296,7 +296,7 @@ internal class MaestroCommandSerializationTest {
             ApplyConfigurationCommand(
                 MaestroConfig(
                     appId = "com.twitter.android",
-                    name = "Twitter",
+                    name = "Twitter"
                 )
             )
         )
@@ -318,7 +318,7 @@ internal class MaestroCommandSerializationTest {
                 }
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -344,7 +344,7 @@ internal class MaestroCommandSerializationTest {
                 "link" : "https://mobile.dev"
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -370,7 +370,7 @@ internal class MaestroCommandSerializationTest {
                 "code" : "ENTER"
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -396,7 +396,7 @@ internal class MaestroCommandSerializationTest {
                 "charactersToErase" : 128
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -422,7 +422,7 @@ internal class MaestroCommandSerializationTest {
                 "path" : "screenshot.png"
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -449,7 +449,7 @@ internal class MaestroCommandSerializationTest {
                 "length" : 2
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -476,7 +476,7 @@ internal class MaestroCommandSerializationTest {
                 "length" : 3
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -503,7 +503,7 @@ internal class MaestroCommandSerializationTest {
                 "length" : 8
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -530,7 +530,7 @@ internal class MaestroCommandSerializationTest {
                 "length" : 8
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)
@@ -556,7 +556,7 @@ internal class MaestroCommandSerializationTest {
                 "timeout" : 9
               }
             }
-          """.trimIndent()
+        """.trimIndent()
         assertThat(serializedCommandJson)
             .isEqualTo(expectedJson)
         assertThat(deserializedCommand)

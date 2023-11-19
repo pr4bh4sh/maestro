@@ -9,7 +9,7 @@ object Traveller {
     fun travel(
         maestro: Maestro,
         points: List<TravelCommand.GeoPoint>,
-        speedMPS: Double,
+        speedMPS: Double
     ) {
         if (points.isEmpty()) {
             return
@@ -32,7 +32,7 @@ object Traveller {
         maestro: Maestro,
         start: TravelCommand.GeoPoint,
         end: TravelCommand.GeoPoint,
-        speedMPS: Double,
+        speedMPS: Double
     ) {
         val steps = 50
 
@@ -54,5 +54,4 @@ object Traveller {
             Thread.sleep(timeToSleep)
         }
     }
-
 }

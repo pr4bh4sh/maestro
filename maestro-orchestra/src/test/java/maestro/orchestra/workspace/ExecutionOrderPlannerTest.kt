@@ -86,5 +86,4 @@ internal class ExecutionOrderPlannerTest {
         val result = getFlowsToRunInSequence(paths, flowOrder)
         assertThat(result).isEqualTo(expected)
     }
-
 }

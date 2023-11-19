@@ -20,7 +20,7 @@ private fun Dadb.tryShell(command: String): String {
     return response.output
 }
 
-class ShellException: Throwable {
+class ShellException : Throwable {
     internal constructor(message: String?) : super(message)
     internal constructor(message: String?, e: Exception?) : super(message, e)
 }

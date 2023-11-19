@@ -45,5 +45,4 @@ class YamlElementSelectorDeserializer : JsonDeserializer<YamlElementSelectorUnio
             mapper.convertValue(root, YamlElementSelector::class.java)
         }
     }
-
 }

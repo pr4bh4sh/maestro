@@ -20,11 +20,11 @@
 package maestro.orchestra.yaml
 
 data class YamlInputRandomText(
-    val length: Int?,
+    val length: Int?
 )
 
 data class YamlInputRandomNumber(
-    val length: Int?,
+    val length: Int?
 )
 
 class YamlInputRandomEmail

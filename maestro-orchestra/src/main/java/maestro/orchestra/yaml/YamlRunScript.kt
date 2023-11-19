@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 data class YamlRunScript(
     val file: String,
     val env: Map<String, String> = emptyMap(),
-    val `when`: YamlCondition? = null,
+    val `when`: YamlCondition? = null
 ) {
 
     companion object {
@@ -13,7 +13,7 @@ data class YamlRunScript(
         @JvmStatic
         @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(file: String) = YamlRunScript(
-            file = file,
+            file = file
         )
     }
 }

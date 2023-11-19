@@ -68,7 +68,7 @@ data class YamlFluentCommand(
     val travel: YamlTravelCommand? = null,
     val startRecording: YamlStartRecording? = null,
     val stopRecording: YamlStopRecording? = null,
-    val addMedia: YamlAddMedia? = null,
+    val addMedia: YamlAddMedia? = null
 ) {
 
     @SuppressWarnings("ComplexMethod")
@@ -81,7 +81,7 @@ data class YamlFluentCommand(
                 MaestroCommand(
                     AssertConditionCommand(
                         Condition(
-                            visible = toElementSelector(assertVisible),
+                            visible = toElementSelector(assertVisible)
                         )
                     )
                 )
@@ -90,7 +90,7 @@ data class YamlFluentCommand(
                 MaestroCommand(
                     AssertConditionCommand(
                         Condition(
-                            notVisible = toElementSelector(assertNotVisible),
+                            notVisible = toElementSelector(assertNotVisible)
                         )
                     )
                 )
@@ -99,7 +99,7 @@ data class YamlFluentCommand(
                 MaestroCommand(
                     AssertConditionCommand(
                         Condition(
-                            scriptCondition = assertTrue,
+                            scriptCondition = assertTrue
                         )
                     )
                 )
@@ -133,14 +133,14 @@ data class YamlFluentCommand(
             stopApp != null -> listOf(
                 MaestroCommand(
                     StopAppCommand(
-                        appId = stopApp.appId ?: appId,
+                        appId = stopApp.appId ?: appId
                     )
                 )
             )
             clearState != null -> listOf(
                 MaestroCommand(
                     maestro.orchestra.ClearStateCommand(
-                        appId = clearState.appId ?: appId,
+                        appId = clearState.appId ?: appId
                     )
                 )
             )
@@ -149,7 +149,7 @@ data class YamlFluentCommand(
                 MaestroCommand(
                     SetLocationCommand(
                         latitude = setLocation.latitude,
-                        longitude = setLocation.longitude,
+                        longitude = setLocation.longitude
                     )
                 )
             )
@@ -164,7 +164,7 @@ data class YamlFluentCommand(
                             .readText(),
                         env = runScript.env,
                         sourceDescription = runScript.file,
-                        condition = runScript.`when`?.toCondition(),
+                        condition = runScript.`when`?.toCondition()
                     )
                 )
             )
@@ -178,7 +178,7 @@ data class YamlFluentCommand(
             evalScript != null -> listOf(
                 MaestroCommand(
                     EvalScriptCommand(
-                        scriptString = evalScript,
+                        scriptString = evalScript
                     )
                 )
             )
@@ -268,10 +268,10 @@ data class YamlFluentCommand(
 
                         TravelCommand.GeoPoint(
                             latitude = latitude,
-                            longitude = longitude,
+                            longitude = longitude
                         )
                     },
-                speedMPS = command.speed,
+                speedMPS = command.speed
             )
         )
     }
@@ -281,7 +281,7 @@ data class YamlFluentCommand(
             times = repeat.times,
             condition = repeat.`while`?.toCondition(),
             commands = repeat.commands
-                .flatMap { it.toCommands(flowPath, appId) },
+                .flatMap { it.toCommands(flowPath, appId) }
         )
     )
 
@@ -351,13 +351,13 @@ data class YamlFluentCommand(
 
         val condition = Condition(
             visible = command.visible?.let { toElementSelector(it) },
-            notVisible = command.notVisible?.let { toElementSelector(it) },
+            notVisible = command.notVisible?.let { toElementSelector(it) }
         )
 
         return MaestroCommand(
             AssertConditionCommand(
                 condition = condition,
-                timeout = command.timeout,
+                timeout = command.timeout
             )
         )
     }
@@ -370,7 +370,7 @@ data class YamlFluentCommand(
                 clearKeychain = command.clearKeychain,
                 stopApp = command.stopApp,
                 permissions = command.permissions,
-                launchArguments = command.arguments,
+                launchArguments = command.arguments
             )
         )
     }
@@ -392,8 +392,11 @@ data class YamlFluentCommand(
         }
 
         val waitToSettleTimeoutMs = (tapOn as? YamlElementSelector)?.waitToSettleTimeoutMs?.let {
-            if (it > TapOnElementCommand.MAX_TIMEOUT_WAIT_TO_SETTLE_MS) TapOnElementCommand.MAX_TIMEOUT_WAIT_TO_SETTLE_MS
-            else it
+            if (it > TapOnElementCommand.MAX_TIMEOUT_WAIT_TO_SETTLE_MS) {
+                TapOnElementCommand.MAX_TIMEOUT_WAIT_TO_SETTLE_MS
+            } else {
+                it
+            }
         }
 
         return if (point != null) {
@@ -471,7 +474,7 @@ data class YamlFluentCommand(
     private fun toElementSelector(selectorUnion: YamlElementSelectorUnion): ElementSelector {
         return if (selectorUnion is StringElementSelector) {
             ElementSelector(
-                textRegex = selectorUnion.value,
+                textRegex = selectorUnion.value
             )
         } else if (selectorUnion is YamlElementSelector) {
             toElementSelector(selectorUnion)
@@ -485,7 +488,7 @@ data class YamlFluentCommand(
             ElementSelector.SizeSelector(
                 width = selector.width,
                 height = selector.height,
-                tolerance = selector.tolerance,
+                tolerance = selector.tolerance
             )
         } else {
             null
@@ -528,7 +531,9 @@ data class YamlFluentCommand(
         val timeout =
             if (yaml.timeout < 0) {
                 ScrollUntilVisibleCommand.DEFAULT_TIMEOUT_IN_MILLIS
-            } else yaml.timeout
+            } else {
+                yaml.timeout
+            }
 
         val visibility = if (yaml.visibilityPercentage < 0) 0 else if (yaml.visibilityPercentage > 100) 100 else yaml.visibilityPercentage
         return MaestroCommand(
@@ -548,7 +553,7 @@ data class YamlFluentCommand(
             platform = platform,
             visible = visible?.let { toElementSelector(it) },
             notVisible = notVisible?.let { toElementSelector(it) },
-            scriptCondition = `true`?.trim(),
+            scriptCondition = `true`?.trim()
         )
     }
 
@@ -566,7 +571,7 @@ data class YamlFluentCommand(
                         clearKeychain = null,
                         stopApp = null,
                         permissions = null,
-                        arguments = null,
+                        arguments = null
                     )
                 )
 
@@ -576,7 +581,7 @@ data class YamlFluentCommand(
 
                 "clearState" -> YamlFluentCommand(
                     clearState = YamlClearState(
-                        appId = null,
+                        appId = null
                     )
                 )
 
@@ -589,19 +594,19 @@ data class YamlFluentCommand(
                 )
 
                 "inputRandomText" -> YamlFluentCommand(
-                    inputRandomText = YamlInputRandomText(length = 8),
+                    inputRandomText = YamlInputRandomText(length = 8)
                 )
 
                 "inputRandomNumber" -> YamlFluentCommand(
-                    inputRandomNumber = YamlInputRandomNumber(length = 8),
+                    inputRandomNumber = YamlInputRandomNumber(length = 8)
                 )
 
                 "inputRandomEmail" -> YamlFluentCommand(
-                    inputRandomEmail = YamlInputRandomEmail(),
+                    inputRandomEmail = YamlInputRandomEmail()
                 )
 
                 "inputRandomPersonName" -> YamlFluentCommand(
-                    inputRandomPersonName = YamlInputRandomPersonName(),
+                    inputRandomPersonName = YamlInputRandomPersonName()
                 )
 
                 "back" -> YamlFluentCommand(

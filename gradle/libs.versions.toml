@@ -19,6 +19,7 @@ axml = "2.1.2"
 commons-codec = "1.15"
 dadb = "1.2.6"
 detekt = "1.19.0"
+ktlint = "11.6.1"
 googleAndroidMaterial = "1.6.0"
 googleFindbugs = "3.0.2"
 googleGson = "2.9.0"
@@ -119,6 +120,7 @@ logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 android-application = { id = "com.android.application", version.ref = "androidPlugin" }
 android-library = { id = "com.android.library", version.ref = "androidPlugin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 google-protobuf = { id = "com.google.protobuf", version.ref = "googleProtobufPlugin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 vanniktech-publish = { id = "com.vanniktech.maven.publish", version = "0.19.0" }

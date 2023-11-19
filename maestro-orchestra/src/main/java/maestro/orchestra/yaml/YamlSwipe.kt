@@ -5,10 +5,8 @@ import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.TreeNode
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
-import com.fasterxml.jackson.databind.MapperFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import com.fasterxml.jackson.databind.json.JsonMapper
 import maestro.SwipeDirection
 import maestro.directionValueOfOrNull
 
@@ -83,7 +81,7 @@ class YamlSwipeDeserializer : JsonDeserializer<YamlSwipe>() {
                 val start = root.path("start").toString().replace("\"", "")
                 val end = root.path("end").toString().replace("\"", "")
                 check(start.contains("%") && end.contains("%")) {
-                    "You need to provide start and end coordinates with %, Found: (${start}, ${end})"
+                    "You need to provide start and end coordinates with %, Found: ($start, $end)"
                 }
                 val startPoints = start
                     .replace("%", "")
@@ -125,5 +123,4 @@ class YamlSwipeDeserializer : JsonDeserializer<YamlSwipe>() {
             root.path("duration").toString().replace("\"", "").toLong()
         }
     }
-
 }

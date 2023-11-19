@@ -12,7 +12,7 @@ data class YamlStartRecording(
         @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(path: String): YamlStartRecording {
             return YamlStartRecording(
-                path = path,
+                path = path
             )
         }
     }

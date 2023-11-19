@@ -12,7 +12,7 @@ data class YamlTakeScreenshot(
         @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(path: String): YamlTakeScreenshot {
             return YamlTakeScreenshot(
-                path = path,
+                path = path
             )
         }
     }

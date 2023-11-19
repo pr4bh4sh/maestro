@@ -12,7 +12,7 @@ class YamlCommandsExtension : ParameterResolver {
 
     override fun supportsParameter(
         parameterContext: ParameterContext,
-        extensionContext: ExtensionContext,
+        extensionContext: ExtensionContext
     ): Boolean {
         val parameterizedType = parameterContext.parameter
             .parameterizedType.typeName.replace("? extends ", "")
@@ -23,7 +23,7 @@ class YamlCommandsExtension : ParameterResolver {
 
     override fun resolveParameter(
         parameterContext: ParameterContext,
-        extensionContext: ExtensionContext,
+        extensionContext: ExtensionContext
     ): Any {
         val yamlFileAnnotation = parameterContext.findAnnotation(YamlFile::class.java)
             .orElseThrow { IllegalArgumentException("No @YamlFile annotation found") }

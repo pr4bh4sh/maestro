@@ -3,7 +3,7 @@ package maestro.orchestra.yaml
 import com.fasterxml.jackson.annotation.JsonCreator
 
 data class YamlStopApp(
-    val appId: String? = null,
+    val appId: String? = null
 ) {
 
     companion object {
@@ -11,9 +11,7 @@ data class YamlStopApp(
         @JvmStatic
         @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(appId: String) = YamlStopApp(
-            appId = appId,
+            appId = appId
         )
-
     }
-
 }

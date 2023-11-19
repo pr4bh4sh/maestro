@@ -26,23 +26,25 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import java.nio.file.Path
-import kotlin.io.path.absolute
-import kotlin.io.path.absolutePathString
-import kotlin.io.path.isDirectory
-import kotlin.io.path.readText
 import maestro.orchestra.ApplyConfigurationCommand
 import maestro.orchestra.MaestroCommand
 import maestro.orchestra.MaestroConfig
 import maestro.orchestra.WorkspaceConfig
 import maestro.orchestra.error.SyntaxError
 import maestro.orchestra.util.Env.withEnv
+import java.nio.file.Path
+import kotlin.io.path.absolute
+import kotlin.io.path.absolutePathString
+import kotlin.io.path.isDirectory
+import kotlin.io.path.readText
 
 object YamlCommandReader {
 
-    val MAPPER = ObjectMapper(YAMLFactory().apply {
-        disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER)
-    }).apply {
+    val MAPPER = ObjectMapper(
+        YAMLFactory().apply {
+            disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER)
+        }
+    ).apply {
         registerModule(KotlinModule.Builder().build())
     }
 

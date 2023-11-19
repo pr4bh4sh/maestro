@@ -9,7 +9,7 @@ data class YamlOpenLink(val link: String, val browser: Boolean = false, val auto
         @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(link: String): YamlOpenLink {
             return YamlOpenLink(
-                link = link,
+                link = link
             )
         }
     }

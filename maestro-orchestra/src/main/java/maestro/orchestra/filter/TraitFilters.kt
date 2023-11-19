@@ -7,7 +7,7 @@ import maestro.orchestra.ElementTrait
 object TraitFilters {
 
     fun buildFilter(
-        trait: ElementTrait,
+        trait: ElementTrait
     ): FilterWithDescription {
         return when (trait) {
             ElementTrait.TEXT -> FilterWithDescription(
@@ -24,5 +24,4 @@ object TraitFilters {
             )
         }
     }
-
 }

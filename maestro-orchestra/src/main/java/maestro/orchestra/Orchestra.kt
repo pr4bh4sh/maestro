@@ -54,7 +54,7 @@ class Orchestra(
     private val onCommandFailed: (Int, MaestroCommand, Throwable) -> ErrorResolution = { _, _, e -> throw e },
     private val onCommandSkipped: (Int, MaestroCommand) -> Unit = { _, _ -> },
     private val onCommandReset: (MaestroCommand) -> Unit = {},
-    private val onCommandMetadataUpdate: (MaestroCommand, CommandMetadata) -> Unit = { _, _ -> },
+    private val onCommandMetadataUpdate: (MaestroCommand, CommandMetadata) -> Unit = { _, _ -> }
 ) {
 
     private lateinit var jsEngine: JsEngine
@@ -74,7 +74,7 @@ class Orchestra(
      */
     fun runFlow(
         commands: List<MaestroCommand>,
-        initState: OrchestraAppState? = null,
+        initState: OrchestraAppState? = null
     ): Boolean {
         timeMsOfLastInteraction = System.currentTimeMillis()
 
@@ -103,7 +103,7 @@ class Orchestra(
                 executeCommands(
                     commands = it,
                     config = config,
-                    shouldReinitJsEngine = false,
+                    shouldReinitJsEngine = false
                 )
             } ?: true
 
@@ -111,7 +111,7 @@ class Orchestra(
                 flowSuccess = executeCommands(
                     commands = filteredCommands,
                     config = config,
-                    shouldReinitJsEngine = false,
+                    shouldReinitJsEngine = false
                 ).also {
                     // close existing screen recording, if left open.
                     screenRecording?.close()
@@ -124,7 +124,7 @@ class Orchestra(
                 executeCommands(
                     commands = it,
                     config = config,
-                    shouldReinitJsEngine = false,
+                    shouldReinitJsEngine = false
                 )
             } ?: true
 
@@ -139,10 +139,10 @@ class Orchestra(
      * app disk state when past into Orchestra.runFlow.
      */
     fun runInitFlow(
-        initFlow: MaestroInitFlow,
+        initFlow: MaestroInitFlow
     ): OrchestraAppState? {
         val success = runFlow(
-            initFlow.commands,
+            initFlow.commands
         )
         if (!success) return null
 
@@ -156,14 +156,14 @@ class Orchestra(
 
         return OrchestraAppState(
             appId = initFlow.appId,
-            file = stateFile.toFile(),
+            file = stateFile.toFile()
         )
     }
 
     fun executeCommands(
         commands: List<MaestroCommand>,
         config: MaestroConfig? = null,
-        shouldReinitJsEngine: Boolean = true,
+        shouldReinitJsEngine: Boolean = true
     ): Boolean {
         if (shouldReinitJsEngine) {
             initJsEngine(config)
@@ -184,7 +184,7 @@ class Orchestra(
                 val evaluatedCommand = command.evaluateScripts(jsEngine)
                 val metadata = getMetadata(command)
                     .copy(
-                        evaluatedCommand = evaluatedCommand,
+                        evaluatedCommand = evaluatedCommand
                     )
                 updateMetadata(command, metadata)
 
@@ -204,7 +204,6 @@ class Orchestra(
                     // Swallow exception
                     onCommandSkipped(index, command)
                 } catch (e: Throwable) {
-
                     when (onCommandFailed(index, command, e)) {
                         ErrorResolution.FAIL -> return false
                         ErrorResolution.CONTINUE -> {
@@ -289,7 +288,7 @@ class Orchestra(
         Traveller.travel(
             maestro = maestro,
             points = command.points,
-            speedMPS = command.speedMPS ?: 4.0,
+            speedMPS = command.speedMPS ?: 4.0
         )
 
         return true
@@ -306,7 +305,7 @@ class Orchestra(
             if (!isOptional(command.condition)) {
                 throw MaestroException.AssertionFailure(
                     "Assertion is false: ${command.condition.description()}",
-                    maestro.viewHierarchy().root,
+                    maestro.viewHierarchy().root
                 )
             } else {
                 throw CommandSkipped
@@ -317,8 +316,8 @@ class Orchestra(
     }
 
     private fun isOptional(condition: Condition): Boolean {
-        return condition.visible?.optional == true
-                || condition.notVisible?.optional == true
+        return condition.visible?.optional == true ||
+            condition.notVisible?.optional == true
     }
 
     private fun evalScriptCommand(command: EvalScriptCommand): Boolean {
@@ -334,7 +333,7 @@ class Orchestra(
                 script = command.script,
                 env = command.env,
                 sourceName = command.sourceDescription,
-                runInSubScope = true,
+                runInSubScope = true
             )
 
             // We do not actually know if there were any mutations, but we assume there were
@@ -433,7 +432,7 @@ class Orchestra(
         var counter = 0
         var metadata = getMetadata(maestroCommand)
         metadata = metadata.copy(
-            numberOfRuns = 0,
+            numberOfRuns = 0
         )
 
         var mutatiing = false
@@ -454,7 +453,7 @@ class Orchestra(
             counter++
 
             metadata = metadata.copy(
-                numberOfRuns = counter,
+                numberOfRuns = counter
             )
             updateMetadata(maestroCommand, metadata)
         }
@@ -495,7 +494,7 @@ class Orchestra(
 
     private fun evaluateCondition(
         condition: Condition?,
-        timeoutMs: Long? = null,
+        timeoutMs: Long? = null
     ): Boolean {
         if (condition == null) {
             return true
@@ -573,7 +572,7 @@ class Orchestra(
                     val evaluatedCommand = command.evaluateScripts(jsEngine)
                     val metadata = getMetadata(command)
                         .copy(
-                            evaluatedCommand = evaluatedCommand,
+                            evaluatedCommand = evaluatedCommand
                         )
                     updateMetadata(command, metadata)
 
@@ -691,7 +690,6 @@ class Orchestra(
             // For testing convenience, default to allow all on app launch
             val permissions = command.permissions ?: mapOf("all" to "allow")
             maestro.setPermissions(command.appId, permissions)
-
         } catch (e: Exception) {
             throw MaestroException.UnableToClearState("Unable to clear state for app ${command.appId}")
         }
@@ -787,7 +785,7 @@ class Orchestra(
     }
 
     private fun tapOnPointV2Command(
-        command: TapOnPointV2Command,
+        command: TapOnPointV2Command
     ): Boolean {
         val point = command.point
 
@@ -842,7 +840,7 @@ class Orchestra(
             )
         val (description, filterFunc) = buildFilter(
             selector,
-            deviceInfo(),
+            deviceInfo()
         )
         if (selector.childOf != null) {
             val parentViewHierarchy = findElementViewHierarchy(
@@ -855,17 +853,16 @@ class Orchestra(
                 parentViewHierarchy
             ) ?: throw MaestroException.ElementNotFound(
                 "Element not found: $description",
-                parentViewHierarchy.root,
+                parentViewHierarchy.root
             )
         }
-
 
         return maestro.findElementWithTimeout(
             timeoutMs = timeout,
             filter = filterFunc
         ) ?: throw MaestroException.ElementNotFound(
             "Element not found: $description",
-            maestro.viewHierarchy().root,
+            maestro.viewHierarchy().root
         )
     }
 
@@ -876,10 +873,10 @@ class Orchestra(
         if (selector == null) {
             return maestro.viewHierarchy()
         }
-        val parentViewHierarchy = findElementViewHierarchy(selector.childOf, timeout);
+        val parentViewHierarchy = findElementViewHierarchy(selector.childOf, timeout)
         val (description, filterFunc) = buildFilter(
             selector,
-            deviceInfo(),
+            deviceInfo()
         )
         return maestro.findElementWithTimeout(
             timeout,
@@ -887,7 +884,7 @@ class Orchestra(
             parentViewHierarchy
         )?.hierarchy ?: throw MaestroException.ElementNotFound(
             "Element not found: $description",
-            parentViewHierarchy.root,
+            parentViewHierarchy.root
         )
     }
 
@@ -896,7 +893,7 @@ class Orchestra(
 
     private fun buildFilter(
         selector: ElementSelector,
-        deviceInfo: DeviceInfo,
+        deviceInfo: DeviceInfo
     ): FilterWithDescription {
         val filters = mutableListOf<ElementFilter>()
         val descriptions = mutableListOf<String>()
@@ -923,7 +920,7 @@ class Orchestra(
                 filters += Filters.sizeMatches(
                     width = it.width,
                     height = it.height,
-                    tolerance = it.tolerance,
+                    tolerance = it.tolerance
                 ).asFilter()
             }
 
@@ -961,12 +958,14 @@ class Orchestra(
             ?.let { descendantSelectors ->
                 val descendantDescriptions = descendantSelectors.joinToString("; ") { it.description() }
                 descriptions += "Contains descendants: $descendantDescriptions"
-                filters += Filters.containsDescendants(descendantSelectors.map {
-                    buildFilter(
-                        it,
-                        deviceInfo
-                    ).filterFunc
-                })
+                filters += Filters.containsDescendants(
+                    descendantSelectors.map {
+                        buildFilter(
+                            it,
+                            deviceInfo
+                        ).filterFunc
+                    }
+                )
             }
 
         selector.traits
@@ -1034,7 +1033,7 @@ class Orchestra(
 
         return FilterWithDescription(
             descriptions.joinToString(", "),
-            resultFilter,
+            resultFilter
         )
     }
 
@@ -1113,7 +1112,7 @@ class Orchestra(
         val numberOfRuns: Int? = null,
         val evaluatedCommand: MaestroCommand? = null,
         val logMessages: List<String> = emptyList(),
-        val insight: Insight = Insight("", Insight.Level.NONE),
+        val insight: Insight = Insight("", Insight.Level.NONE)
     )
 
     enum class ErrorResolution {
@@ -1131,5 +1130,5 @@ class Orchestra(
 
 data class OrchestraAppState(
     val appId: String,
-    val file: File,
+    val file: File
 )

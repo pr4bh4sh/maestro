@@ -6,7 +6,7 @@ data class YamlRunFlow(
     val file: String? = null,
     val `when`: YamlCondition? = null,
     val env: Map<String, String> = emptyMap(),
-    val commands: List<YamlFluentCommand>? = null,
+    val commands: List<YamlFluentCommand>? = null
 ) {
 
     companion object {
@@ -14,7 +14,7 @@ data class YamlRunFlow(
         @JvmStatic
         @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         fun parse(file: String) = YamlRunFlow(
-            file = file,
+            file = file
         )
     }
 }

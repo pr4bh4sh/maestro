@@ -10,14 +10,14 @@ class YamlExceptionExtension : ParameterResolver {
 
     override fun supportsParameter(
         parameterContext: ParameterContext,
-        extensionContext: ExtensionContext,
+        extensionContext: ExtensionContext
     ): Boolean {
         return RuntimeException::class.java.isAssignableFrom(parameterContext.parameter.type)
     }
 
     override fun resolveParameter(
         parameterContext: ParameterContext,
-        extensionContext: ExtensionContext,
+        extensionContext: ExtensionContext
     ): Any {
         val yamlFileAnnotation = parameterContext.findAnnotation(YamlFile::class.java)
             .orElseThrow { IllegalArgumentException("No @YamlFile annotation found") }
